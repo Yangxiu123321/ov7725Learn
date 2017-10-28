@@ -7,8 +7,8 @@
 
 
 
-__IO uint16_t  g_ColorData16t[40][320]={0};//DCMI接口采集原始数据内存
 
+__IO uint16_t  g_ColorData16t[40][320];
 __IO uint16_t  g_ColorData16t_debug[5][320]={0};//DCMI接口采集原始数据内存
 __IO uint16_t  g_ColorData16t_ROI[5][10]={0};//DCMI接口采集原始数据内存
 __IO uint16_t  g_ColorData16t_deal[5][320]={0};//DCMI接口采集原始数据内存
@@ -17,11 +17,6 @@ __IO uint16_t  g_ColorData16t_deal[5][320]={0};//DCMI接口采集原始数据内存
 q31_t  g_ColorDataRRR8t[SIMPLE_LINE][320]={0};//8位RGB值R分量
 q31_t  g_ColorDataGGG8t[SIMPLE_LINE][320]={0};//8位RGB值G分量
 q31_t  g_ColorDataBBB8t[SIMPLE_LINE][320]={0};//8位RGB值B分量
-
-q31_t  g_ColorDataRRR8t_compare[5][320]={0};//8位RGB值R分量
-q31_t  g_ColorDataGGG8t_compare[5][320]={0};//8位RGB值G分量
-q31_t  g_ColorDataBBB8t_compare[5][320]={0};//8位RGB值B分量
-
 
 q31_t  g_ColorDataRRR8t_ROI[5][10]={0};//8位RGB值R分量
 q31_t  g_ColorDataGGG8t_ROI[5][10]={0};//8位RGB值G分量
@@ -331,12 +326,15 @@ u16 beforeline=0;
 //static u16 i=0;
 //static q31_t mult=300;
 //static uint16_t jj=0;	
-      u16 popopoold=0;
-	  u16 canuseold=0;
+u16 popopoold=0;
+u16 canuseold=0;
 u16 hangnow=0,hangold=0;
 
 uint8_t statezhuang=0;///,jump=0,nextone=0
-
+extern u16 canuse;
+extern u16 start;
+extern u16 replaceline;
+u16 recordline=0;
 void SeeSmallCar(void)
 {
 	 u16 i=0;
@@ -361,8 +359,8 @@ void SeeSmallCar(void)
 //			coloGGG[jj]=(((g_ColorData16t[chuliline][jj]>>5)&0x3f)<<2)|(((g_ColorData16t[chuliline][jj]>>5)&0x3f)&0x03);
 //			coloBBB[jj]=((g_ColorData16t[chuliline][jj]&0x1f)<<3)|(g_ColorData16t[chuliline][jj]&0x07);			
 //		}
-		arm_add_q31(&coloRRR[0],&coloGGG[0],dspq31t_buffer1,320);
-		arm_add_q31(dspq31t_buffer1,&coloBBB[0],dspq31t_buffer1,320);//和计算给buffer1
+		//arm_add_q31(&coloRRR[0],&coloGGG[0],dspq31t_buffer1,320);
+		//arm_add_q31(dspq31t_buffer1,&coloBBB[0],dspq31t_buffer1,320);//和计算给buffer1
 		
 		//求S
 //		arm_min_q31_action(&coloRRR[0],&coloGGG[0],dspq31t_buffer2,320);

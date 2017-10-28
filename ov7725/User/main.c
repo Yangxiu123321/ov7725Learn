@@ -158,8 +158,8 @@ int main(void)
 	{
 		static uint8_t CANSendData1[8]={2};
 		static int timecount=0;
-		 while(g_DCMI_IT_FRAME_FLAG!=0){};//等待识别条到来
-     g_DCMI_IT_FRAME_FLAG=2;
+		while(g_DCMI_IT_FRAME_FLAG!=0){};//等待识别条到来
+    g_DCMI_IT_FRAME_FLAG=2;
 		if(start==1)
 		{
 			yushu=(canuse%40);
@@ -195,7 +195,7 @@ int main(void)
 		}	
 //	SeeSmallCar();	
 	
-}
+   }
 
 
 // 				  

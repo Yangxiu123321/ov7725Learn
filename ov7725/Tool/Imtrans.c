@@ -1,4 +1,10 @@
 #include "Imtrans.h"
+#include "picture.h"
+#include "config.h"
+#include "camera/SCCB.h"
+#include "arm_math.h"
+#include "LCD/LCD.h"
+#include "usart.h"
 
 #define   RGB565_MASK_RED         0xF800 
 #define   RGB565_MASK_GREEN     0x07E0 
@@ -22,9 +28,9 @@ q31_t coloBBB[320];
 extern u16 canuse;
 extern u16 start;
 extern u16 replaceline;
-
+extern __IO uint16_t  g_ColorData16t[40][320];
 u16 qumo=0;
-u16 recordline=0;
+
 
 void RGB565TORGB888(void)
 {
@@ -54,8 +60,9 @@ void RGB565TORGB888(void)
 	else
 	{chuliline=qumo-2;}
 	
-		for(jj=0;jj<320;jj++)
+		for(int jj=0;jj<320;jj++)
 		{
+			//最后空闲位重复
 			coloRRR[jj]=((g_ColorData16t[chuliline][jj]>>11)<<3)|((g_ColorData16t[chuliline][jj]>>11)&0x07);
 			coloGGG[jj]=(((g_ColorData16t[chuliline][jj]>>5)&0x3f)<<2)|(((g_ColorData16t[chuliline][jj]>>5)&0x3f)&0x03);
 			coloBBB[jj]=((g_ColorData16t[chuliline][jj]&0x1f)<<3)|(g_ColorData16t[chuliline][jj]&0x07);			

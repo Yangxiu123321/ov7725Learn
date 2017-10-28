@@ -208,7 +208,7 @@ void DCMI_IRQHandler(void)
 //		{
 //			g_DCMI_IT_FRAME_FLAG=0;		
 //	    }
-		//if(start==1)
+		if(start==1)
 		{canuse++;replaceline=canuse-1;}
 		shuzu[i++]=canuse;
 	    if(i>319)
