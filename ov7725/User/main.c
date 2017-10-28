@@ -27,6 +27,9 @@
 #include "camera/picture.h"
 #include "arm_math.h"
 #include "can.h"
+#include "Imtrans.h"
+#include "rodata.h"
+
 /** @addtogroup STM32F2xx_StdPeriph_Examples
   * @{
   */
@@ -153,7 +156,7 @@ int main(void)
   g_DCMI_IT_FRAME_FLAG=2;
 	
 	fps_time=0;//计算帧率变量
-	
+  extern u8 graypixel[PIXEL_H][PIXEL_W];
 	while(1)//加DSP后总运行3.7ms!!!!!!!!!
 	{
 		static uint8_t CANSendData1[8]={2};
@@ -162,6 +165,7 @@ int main(void)
     g_DCMI_IT_FRAME_FLAG=2;
 		if(start==1)
 		{
+			Itera_Threshold();
 			yushu=(canuse%40);
 			if(yushu==1)
 			{cmline=39;}		
@@ -175,14 +179,30 @@ int main(void)
 				LCD_SetCursor(0,239);
 				LCD_REG = 0x0022;
 				for(jj=0;jj<320;jj++)
-					LCD_RAM=g_ColorData16t[39][jj];
+				{
+					if(graypixel[39][jj]==255)
+					{
+						LCD_RAM=0xffff;
+					}else{
+						LCD_RAM=0x0000;
+					}
+				}
+				//	LCD_RAM=g_ColorData16t[39][jj];
 			}
 			else
 			{
 					LCD_SetCursor(0,canuse-2);
 					LCD_REG = 0x0022;
-				   for(jj=0;jj<320;jj++)
-					LCD_RAM=g_ColorData16t[cmline][jj];
+				  for(jj=0;jj<320;jj++)
+					{
+						if(graypixel[cmline][jj]==255)
+						{
+							LCD_RAM=0xffff;
+						}else{
+							LCD_RAM=0x0000;
+						}
+						}
+					//LCD_RAM=g_ColorData16t[cmline][jj];
 			}
 /********************************************/			
 		timecount++;

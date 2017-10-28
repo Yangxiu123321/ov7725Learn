@@ -46,3 +46,4 @@
 .\output\imtrans.o: ..\User\LCD/LCD.h
 .\output\imtrans.o: ..\User\LCD/AsciiLib.h
 .\output\imtrans.o: ..\User\usart.h
+.\output\imtrans.o: ..\Tool\rodata.h

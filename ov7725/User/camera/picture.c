@@ -344,7 +344,7 @@ void SeeSmallCar(void)
 //	 static q31_t canuseold=0;
 	if( ((replaceline>0) && ((replaceline-recordline)==5)) || (replaceline==1) )
 	{
-		RGB565TORGB888();
+		//RGB565TORGB888();
 //	qumo=(canuse%40);
 //    if(qumo==1)
 //	{chuliline=39;}		

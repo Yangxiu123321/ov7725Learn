@@ -22,23 +22,23 @@ Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
 E:\ov7725Learn\ov7725\Project\Project.uvprojx
-Project File Date:  10/27/2017
+Project File Date:  10/28/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'D:\program files\mdk521a\ARM\ARMCC\Bin'
 Build target 'Open407V-D'
-compiling main.c...
-..\User\main.c(159): warning:  #177-D: variable "CANSendData1" was declared but never referenced
-  		static uint8_t CANSendData1[8]={2};
-..\User\main.c(67): warning:  #177-D: variable "i" was declared but never referenced
-  	int16_t i=0,ii=0;
-..\User\main.c(67): warning:  #177-D: variable "ii" was declared but never referenced
-  	int16_t i=0,ii=0;
-..\User\main.c(68): warning:  #177-D: variable "fps" was declared but never referenced
-  	uint16_t fps=0;
-..\User\main.c: 4 warnings, 0 errors
+compiling Imtrans.c...
+..\Tool\Imtrans.c(72): warning:  #177-D: variable "mux_later" was declared but never referenced
+  	uint16_t R,G,B,mux,mux_later;
+..\Tool\Imtrans.c(73): warning:  #177-D: variable "data" was declared but never referenced
+  	float data = 0.0;
+..\Tool\Imtrans.c(169): warning:  #1-D: last line of file ends without a newline
+  }
+..\Tool\Imtrans.c(100): warning:  #177-D: variable "Camera_Data" was declared but never referenced
+    u16 i=0,j=0,k=0,cnt=0,mux=0,Camera_Data=0;
+..\Tool\Imtrans.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=19466 RO-data=2122 RW-data=72 ZI-data=27872  
+Program Size: Code=20270 RO-data=2122 RW-data=72 ZI-data=41440  
 FromELF: creating hex file...
 ".\Output\Project.axf" - 0 Error(s), 4 Warning(s).
 
@@ -58,7 +58,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:11
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

@@ -47,3 +47,5 @@
 .\output\main.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\output\main.o: ..\User\can.h
+.\output\main.o: ..\Tool\Imtrans.h
+.\output\main.o: ..\Tool\rodata.h

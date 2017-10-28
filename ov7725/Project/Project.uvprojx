@@ -434,6 +434,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\can.c</FilePath>
             </File>
+            <File>
+              <FileName>vesion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\camera\vesion.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -443,6 +448,11 @@
               <FileName>Imtrans.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Tool\Imtrans.c</FilePath>
+            </File>
+            <File>
+              <FileName>rodata.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Tool\rodata.c</FilePath>
             </File>
           </Files>
         </Group>
