@@ -145,7 +145,7 @@ int main(void)
 			
 			
 // 	/*自动曝光设置*/
-// 	AEC_WHITE_Fun();
+ 	//AEC_WHITE_Fun();
 	
   //PA11 PA12CAN接口
   // CamreaCanInit();
@@ -165,7 +165,7 @@ int main(void)
     g_DCMI_IT_FRAME_FLAG=2;
 		if(start==1)
 		{
-			Itera_Threshold();
+			//Itera_Threshold();
 			yushu=(canuse%40);
 			if(yushu==1)
 			{cmline=39;}		
@@ -180,14 +180,14 @@ int main(void)
 				LCD_REG = 0x0022;
 				for(jj=0;jj<320;jj++)
 				{
-					if(graypixel[39][jj]==255)
-					{
-						LCD_RAM=0xffff;
-					}else{
-						LCD_RAM=0x0000;
-					}
+					LCD_RAM=g_ColorData16t[39][jj];
+//					if(graypixel[39][jj]==255)
+//					{
+//						LCD_RAM=0xffff;
+//					}else{
+//						LCD_RAM=0x0000;
+//					}
 				}
-				//	LCD_RAM=g_ColorData16t[39][jj];
 			}
 			else
 			{
@@ -195,14 +195,14 @@ int main(void)
 					LCD_REG = 0x0022;
 				  for(jj=0;jj<320;jj++)
 					{
-						if(graypixel[cmline][jj]==255)
-						{
-							LCD_RAM=0xffff;
-						}else{
-							LCD_RAM=0x0000;
-						}
-						}
-					//LCD_RAM=g_ColorData16t[cmline][jj];
+//						if(graypixel[cmline][jj]==255)
+//						{
+//							LCD_RAM=0xffff;
+//						}else{
+//							LCD_RAM=0x0000;
+//						}
+//						}
+					LCD_RAM=g_ColorData16t[cmline][jj];
 			}
 /********************************************/			
 		timecount++;
@@ -213,7 +213,7 @@ int main(void)
 			//CAN_TxMsg(CAN1,1,CANSendData1,1);
 			timecount=0;
 		}	
-//	SeeSmallCar();	
+	//SeeSmallCar();	
 	
    }
 
@@ -235,7 +235,7 @@ int main(void)
 //   					SendData();
 	}
 }
-
+}
 void Delay(__IO uint32_t nTime)
 { 
   TimingDelay = nTime;
