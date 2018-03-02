@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
   * @file    main.c 
-  * @author  MCD Application Team
+  * @author  Yangxiu
   * @version V1.0.0
-  * @date    18-April-2011
+  * @date    18-April-2018
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -20,17 +20,25 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx.h"
+#include "can.h"
+#include "misc.h"
 #include "usart.h"
+#include "rodata.h"
 #include "LCD/LCD.h"
+#include "arm_math.h"
+#include "Imtrans.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_dma.h"
+#include "stm32f4xx_dcmi.h"
+#include "stm32f4xx_gpio.h"
 #include "camera/dcmi_OV7670.h"
 #include "camera/picture.h"
-#include "arm_math.h"
-#include "can.h"
-#include "Imtrans.h"
-#include "rodata.h"
 
-/** @addtogroup STM32F2xx_StdPeriph_Examples
+
+
+
+/** @addtogroup STM32F4xx_StdPeriph_Examples
   * @{
   */
 
@@ -57,12 +65,12 @@ extern uint16_t camer_lines_4;
   * @retval None
   */
 uint16_t fps_time=0;
-extern __IO u16 canuse;
-extern u16 start;
-extern u16 replaceline;
-u16 lines=0;
-u16 comelines=0;	
-u16 jj1=0;
+extern __IO uint16_t canuse;
+extern uint16_t start;
+extern uint16_t replaceline;
+uint16_t lines=0;
+uint16_t comelines=0;	
+uint16_t jj1=0;
 
 int main(void)
 {	
@@ -71,7 +79,7 @@ int main(void)
 	uint16_t fps=0;
 	uint16_t jj=0;
 	GPIO_InitTypeDef GPIO_InitStructure;
-	static u16 yushu=0,cmline=0;
+	static uint16_t yushu=0,cmline=0;
 
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
@@ -144,7 +152,7 @@ int main(void)
 	USART_OUT(USART3,"Camera AEC_Fun...");		
 			
 			
-// 	/*自动曝光设置*/
+ 	/*自动曝光设置*/
  	//AEC_WHITE_Fun();
 	
   //PA11 PA12CAN接口
@@ -156,21 +164,27 @@ int main(void)
   g_DCMI_IT_FRAME_FLAG=2;
 	
 	fps_time=0;//计算帧率变量
-  extern u8 graypixel[PIXEL_H][PIXEL_W];
+  extern uint8_t graypixel[PIXEL_H][PIXEL_W];
 	while(1)//加DSP后总运行3.7ms!!!!!!!!!
 	{
 		static uint8_t CANSendData1[8]={2};
-		static int timecount=0;
+		static int timeCount=0;
 		while(g_DCMI_IT_FRAME_FLAG!=0){};//等待识别条到来
     g_DCMI_IT_FRAME_FLAG=2;
 		if(start==1)
 		{
 			//Itera_Threshold();
+			//GUI_Text(100,200,(uint8_t*)"Ok!!",White,Blue);
+			//GUI_Text_variables(100,200,White,Blue,canuse);
 			yushu=(canuse%40);
-			if(yushu==1)
-			{cmline=39;}		
+			if(yushu==1) 
+			{
+				cmline=39;
+			}		
 			else if(yushu==0)
-			{cmline=38;}
+			{
+				cmline=38;
+			}
 			else
 			{cmline=yushu-2;}
 			
@@ -181,37 +195,24 @@ int main(void)
 				for(jj=0;jj<320;jj++)
 				{
 					LCD_RAM=g_ColorData16t[39][jj];
-//					if(graypixel[39][jj]==255)
-//					{
-//						LCD_RAM=0xffff;
-//					}else{
-//						LCD_RAM=0x0000;
-//					}
 				}
 			}
 			else
 			{
-					LCD_SetCursor(0,canuse-2);
-					LCD_REG = 0x0022;
-				  for(jj=0;jj<320;jj++)
-					{
-//						if(graypixel[cmline][jj]==255)
-//						{
-//							LCD_RAM=0xffff;
-//						}else{
-//							LCD_RAM=0x0000;
-//						}
-//						}
+				LCD_SetCursor(0,canuse-2);
+				LCD_REG = 0x0022;
+				for(jj=0;jj<320;jj++)
+				{
 					LCD_RAM=g_ColorData16t[cmline][jj];
-			}
+				}
 /********************************************/			
-		timecount++;
+		timeCount++;
 		//调试函数
-		if(timecount>10000)
+		if(timeCount>10000)
 		{
 			//USART_OUT(USART3,"%d\t",);
 			//CAN_TxMsg(CAN1,1,CANSendData1,1);
-			timecount=0;
+			timeCount=0;
 		}	
 	//SeeSmallCar();	
 	
@@ -260,7 +261,7 @@ void TimingDelay_Decrement(void)
 void LCD_CS_ResetBits(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 
 	//LCD_CS PD7
 

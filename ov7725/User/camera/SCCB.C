@@ -13,7 +13,10 @@
 *********************************************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
+#include "config.h"
 #include "camera/SCCB.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_i2c.h"
 
 __IO uint32_t  DCMI_TIMEOUT_MAX = SCCB_Open207V_FLAG_TIMEOUT;
 

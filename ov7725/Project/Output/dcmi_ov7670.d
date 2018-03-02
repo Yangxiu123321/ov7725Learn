@@ -1,8 +1,8 @@
 .\output\dcmi_ov7670.o: ..\User\camera\dcmi_OV7670.c
-.\output\dcmi_ov7670.o: ..\User\camera/dcmi_OV7670.h
+.\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\dcmi_ov7670.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\dcmi_ov7670.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\dcmi_ov7670.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\dcmi_ov7670.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\dcmi_ov7670.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\dcmi_ov7670.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -35,7 +35,10 @@
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\output\dcmi_ov7670.o: ..\User\stm32f4xx_it.h
+.\output\dcmi_ov7670.o: ..\User\camera/picture.h
+.\output\dcmi_ov7670.o: ..\User\camera/dcmi_OV7670.h
 .\output\dcmi_ov7670.o: ..\User\camera/SCCB.h
 .\output\dcmi_ov7670.o: ..\User\config.h
-.\output\dcmi_ov7670.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\dcmi_ov7670.o: ..\User\camera/DCMI_OV7670_INITTABLE.h

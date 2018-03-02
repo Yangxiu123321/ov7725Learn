@@ -1,10 +1,10 @@
 .\output\vesion.o: ..\User\camera\vesion.c
 .\output\vesion.o: ..\User\camera\version.h
 .\output\vesion.o: ..\User\config.h
-.\output\vesion.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\vesion.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\vesion.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\vesion.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\vesion.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -40,8 +40,8 @@
 .\output\vesion.o: ..\User\camera/SCCB.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\vesion.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\vesion.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\string.h
-.\output\vesion.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\math.h
+.\output\vesion.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\vesion.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\vesion.o: ..\User\LCD/LCD.h
 .\output\vesion.o: ..\User\LCD/AsciiLib.h
 .\output\vesion.o: ..\User\usart.h

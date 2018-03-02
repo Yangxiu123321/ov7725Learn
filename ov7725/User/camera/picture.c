@@ -4,7 +4,8 @@
 #include "arm_math.h"
 #include "LCD/LCD.h"
 #include "usart.h"
-
+#include "can.h"
+#include "stm32f4xx_dcmi.h"
 
 
 
@@ -317,29 +318,29 @@ void SendDataToPC(void)
 uint16_t j=0,k=0;//Ñ­»·ÓÃ
 
 uint8_t state=0;///,jump=0,nextone=0
-//extern u16 canuse;
-//extern u16 start;
-u16 popopo=0;
-u8 view=0;
+//extern uint16_t canuse;
+//extern uint16_t start;
+uint16_t popopo=0;
+uint8_t view=0;
 q31_t findwh[320]={0};
-u16 beforeline=0;
-//static u16 i=0;
+uint16_t beforeline=0;
+//static uint16_t i=0;
 //static q31_t mult=300;
 //static uint16_t jj=0;	
-u16 popopoold=0;
-u16 canuseold=0;
-u16 hangnow=0,hangold=0;
+uint16_t popopoold=0;
+uint16_t canuseold=0;
+uint16_t hangnow=0,hangold=0;
 
 uint8_t statezhuang=0;///,jump=0,nextone=0
-extern u16 canuse;
-extern u16 start;
-extern u16 replaceline;
-u16 recordline=0;
+extern uint16_t canuse;
+extern uint16_t start;
+extern uint16_t replaceline;
+uint16_t recordline=0;
 void SeeSmallCar(void)
 {
-	 u16 i=0;
+	 uint16_t i=0;
 //	 q31_t mult=300;
-	 u16 jj=0;	
+	 uint16_t jj=0;	
 //     static q31_t popopoold=0;
 //	 static q31_t canuseold=0;
 	if( ((replaceline>0) && ((replaceline-recordline)==5)) || (replaceline==1) )

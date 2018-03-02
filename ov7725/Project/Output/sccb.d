@@ -1,8 +1,9 @@
 .\output\sccb.o: ..\User\camera\SCCB.C
-.\output\sccb.o: ..\User\camera/SCCB.h
+.\output\sccb.o: ..\User\config.h
+.\output\sccb.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\sccb.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\sccb.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\sccb.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\sccb.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\sccb.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\sccb.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\sccb.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -35,5 +36,4 @@
 .\output\sccb.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\sccb.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\sccb.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\output\sccb.o: ..\User\config.h
-.\output\sccb.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\sccb.o: ..\User\camera/SCCB.h

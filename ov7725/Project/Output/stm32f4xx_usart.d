@@ -2,7 +2,7 @@
 .\output\stm32f4xx_usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\stm32f4xx_usart.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\stm32f4xx_usart.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\stm32f4xx_usart.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\stm32f4xx_usart.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\stm32f4xx_usart.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\stm32f4xx_usart.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\stm32f4xx_usart.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h

@@ -1,4 +1,4 @@
---cpu Cortex-M4.fp
+--cpu=Cortex-M4.fp
 ".\output\main.o"
 ".\output\sccb.o"
 ".\output\dcmi_ov7670.o"
@@ -24,6 +24,6 @@
 ".\output\system_stm32f4xx.o"
 "..\Libraries\dsplib\arm_cortexM4lf_math.lib"
 --strict --scatter ".\Output\Project.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listing\Project.map" -o .\Output\Project.axf

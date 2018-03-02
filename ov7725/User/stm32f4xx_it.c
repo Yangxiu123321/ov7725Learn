@@ -22,9 +22,13 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_it.h"
 #include "usart.h"
 #include "LCD/LCD.h"
+#include "stm32f4xx_can.h"
+#include "stm32f4xx_it.h"
+#include "stm32f4xx_dma.h"
+#include "stm32f4xx_dcmi.h"
+#include "stm32f4xx_usart.h"
 #include "camera/picture.h"
 
 
@@ -171,10 +175,10 @@ uint16_t camer_lines=0,camer_lines_4=0;//上电时默认看远方  在拐弯时改变此值 在中
 uint8_t cameralineschange='b';
 
 
-__IO u16 canuse=0;
-u16 start=0;
-u16 replaceline=0;
-u16 shuzu[320]={0}; 
+__IO uint16_t canuse=0;
+uint16_t start=0;
+uint16_t replaceline=0;
+uint16_t shuzu[320]={0}; 
 void DCMI_IRQHandler(void)
 {
 	static uint16_t j=0,i=0;
@@ -197,7 +201,9 @@ void DCMI_IRQHandler(void)
 //			camer_lines_4=15 ;
 //		}
 // 		j=0;
-		canuse=0;start=1;
+		//new frame start
+		canuse=0;
+		start=1;
 		DCMI_ClearITPendingBit(DCMI_IT_VSYNC); 
 	}
 	
@@ -207,14 +213,16 @@ void DCMI_IRQHandler(void)
 //		if(j==camer_lines)//第22行结束后开始取第10~20行图像数据  值越小，越靠前  远100(33cm)   近220(20cm)
 //		{
 //			g_DCMI_IT_FRAME_FLAG=0;		
-//	    }
+//	  }
 		if(start==1)
-		{canuse++;replaceline=canuse-1;}
+		{
+			canuse++;replaceline=canuse-1;
+		}
 		shuzu[i++]=canuse;
-	    if(i>319)
-	    {i=0;}
-		
-		
+	  if(i>319)
+		{
+			i=0;
+		}
 		g_DCMI_IT_FRAME_FLAG=0;	
 		DCMI_ClearITPendingBit(DCMI_IT_LINE); 			  
 	}

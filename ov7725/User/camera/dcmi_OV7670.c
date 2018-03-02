@@ -21,6 +21,14 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+#include "misc.h"
+#include "stm32f4xx_it.h"
+#include "stm32f4xx_dma.h"
+#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_dcmi.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_usart.h"
+#include "camera/picture.h"
 #include "camera/dcmi_OV7670.h"
 #include "camera/DCMI_OV7670_INITTABLE.h"
 
@@ -67,16 +75,16 @@ void DCMI_Config(void)
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_DCMI);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_DCMI);
 	
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource8, GPIO_AF_DCMI);
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource8, GPIO_AF_DCMI);
 
 //Blue
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource9, GPIO_AF_DCMI);     //很暗
-	GPIO_PinAFConfig(GPIOE, GPIO_PinSource4, GPIO_AF_DCMI);	
+  GPIO_PinAFConfig(GPIOC, GPIO_PinSource9, GPIO_AF_DCMI);     //很暗
+  GPIO_PinAFConfig(GPIOE, GPIO_PinSource4, GPIO_AF_DCMI);	
 
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_DCMI);        //很暗
-	
-	GPIO_PinAFConfig(GPIOE, GPIO_PinSource5, GPIO_AF_DCMI);
-	GPIO_PinAFConfig(GPIOE, GPIO_PinSource6, GPIO_AF_DCMI);
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_DCMI);      //很暗
+
+  GPIO_PinAFConfig(GPIOE, GPIO_PinSource5, GPIO_AF_DCMI);
+  GPIO_PinAFConfig(GPIOE, GPIO_PinSource6, GPIO_AF_DCMI);
 
 
   
@@ -160,7 +168,7 @@ void DCMI_Config(void)
 
   DMA_InitStructure.DMA_Channel = DMA_Channel_1;  
   DMA_InitStructure.DMA_PeripheralBaseAddr = DCMI_DR_ADDRESS;	
-  DMA_InitStructure.DMA_Memory0BaseAddr = (u32)g_ColorData16t;
+  DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)g_ColorData16t;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
   DMA_InitStructure.DMA_BufferSize = 20*320;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;

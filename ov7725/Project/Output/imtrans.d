@@ -3,7 +3,7 @@
 .\output\imtrans.o: ..\User\camera\picture.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\imtrans.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\imtrans.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -37,12 +37,12 @@
 .\output\imtrans.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\imtrans.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\imtrans.o: ..\User\config.h
-.\output\imtrans.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\imtrans.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\imtrans.o: ..\User\camera/SCCB.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\imtrans.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\imtrans.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\string.h
-.\output\imtrans.o: D:\program files\mdk521a\ARM\ARMCC\Bin\..\include\math.h
+.\output\imtrans.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\imtrans.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\imtrans.o: ..\User\LCD/LCD.h
 .\output\imtrans.o: ..\User\LCD/AsciiLib.h
 .\output\imtrans.o: ..\User\usart.h

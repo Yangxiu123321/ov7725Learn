@@ -116,7 +116,7 @@ __inline void LCD_WriteIndex(uint16_t index);
 __inline void LCD_WriteData(uint16_t data);
 __inline uint16_t LCD_ReadData(void);
 __inline uint16_t LCD_ReadReg(uint16_t LCD_Reg);
- void LCD_WriteReg(uint16_t LCD_Reg,uint16_t LCD_RegValue);
+void LCD_WriteReg(uint16_t LCD_Reg,uint16_t LCD_RegValue);
 void LCD_SetCursor( uint16_t Xpos, uint16_t Ypos );
 static void delay_ms(uint16_t ms);
 void GUI_Num(uint16_t Xpos, uint16_t Ypos, int16_t number,uint16_t Color, uint16_t bkColor);
