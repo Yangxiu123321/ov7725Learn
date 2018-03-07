@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    DCMI/OV7670_Camera/dcmi_OV7670.c
+  * @file    DCMI/OV7725_Camera/dcmi_OV7725.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    18-April-2011
-  * @brief   This file includes the driver for OV7670 Camera module mounted on 
+  * @brief   This file includes the driver for OV7725 Camera module mounted on 
   *          STM322xG-EVAL board RevA and RevB.
   ******************************************************************************
   * @attention
@@ -22,6 +22,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "misc.h"
+#include "LCD.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_rcc.h"
@@ -29,12 +30,12 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_usart.h"
 #include "camera/picture.h"
-#include "camera/dcmi_OV7670.h"
-#include "camera/DCMI_OV7670_INITTABLE.h"
+#include "camera/dcmi_OV7725.h"
+#include "camera/DCMI_OV7725_INITTABLE.h"
 
 
 extern __IO uint16_t g_ColorData16t[SIMPLE_LINE][320];//DCMI接口采集原始数据内存
-/** @addtogroup DCMI_OV7670_Camera
+/** @addtogroup DCMI_OV7725_Camera
   * @{
   */
 
@@ -49,7 +50,7 @@ static void Delay(uint32_t nTime);
 static void Delay_ms(uint32_t nTime);
 
 /**
-  * @brief  Configures the DCMI to interface with the OV7670 camera module.
+  * @brief  Configures the DCMI to interface with the OV7725 camera module.
   * @param  None
   * @retval None
   */
@@ -244,11 +245,14 @@ uint8_t DCMI_OV7725_Init(void)
 	SCCB_GPIO_Config();
 	DCMI_Config();
 	MCO1_Init();
-	//DCMI_0V7670_RST_PWDN_Init();
+	//DCMI_0V7725_RST_PWDN_Init();
 			
-  	Delay_ms(0xfff);
-	if(DCMI_SingleRandomWrite(OV7670_COM7, SCCB_REG_RESET)!=0)
+  Delay_ms(0xfff);
+	//Resets all registers to default valus
+	if(DCMI_SingleRandomWrite(OV7725_COM7, SCCB_REG_RESET)!=0)
+	{
 		return 0xff;
+	}
 	Delay_ms(0xfff);
   
 	for(i=0;i<(sizeof(change_reg)/2);i++)
@@ -258,36 +262,36 @@ uint8_t DCMI_OV7725_Init(void)
 			return 0xff;
 		}
 	}
-	//OV7670_config_window(272,16,320,240);// set 240*320
+	//OV7725_config_window(0,0,320,240);// set 240*320
 	Delay_ms(0xfff);
 	return 0;//Init ok
 }
 
 /**
-  * @brief  Read the OV7670 Manufacturer identifier.
-  * @param  OV7670ID: pointer to the OV7670 Manufacturer identifier. 
+  * @brief  Read the OV7725 Manufacturer identifier.
+  * @param  OV7725ID: pointer to the OV7725 Manufacturer identifier. 
   * @retval None
   */
 
-//#define OV7670_MIDH       0x1C 
-//#define OV7670_MIDL       0x1D 
-// #define OV7670_PID        0x0A  
-// #define OV7670_VER        0x0B  
-uint8_t DCMI_OV7670_ReadID(OV7670_IDTypeDef* OV7670ID)
+//#define OV7725_MIDH       0x1C 
+//#define OV7725_MIDL       0x1D 
+// #define OV7725_PID        0x0A  
+// #define OV7725_VER        0x0B  
+uint8_t DCMI_OV7725_ReadID(OV7725_IDTypeDef* OV7725ID)
 {
 	uint8_t temp;
-	if(DCMI_SingleRandomRead(OV7670_MIDH,&temp)!=0)
+	if(DCMI_SingleRandomRead(OV7725_MIDH,&temp)!=0)
 		return 0xff;
-	OV7670ID->Manufacturer_ID1 = temp;
-	if(DCMI_SingleRandomRead(OV7670_MIDL,&temp)!=0)
+	OV7725ID->Manufacturer_ID1 = temp;
+	if(DCMI_SingleRandomRead(OV7725_MIDL,&temp)!=0)
 		return 0xff;
-	OV7670ID->Manufacturer_ID2 = temp;
-	if(DCMI_SingleRandomRead(OV7670_VER,&temp)!=0)
+	OV7725ID->Manufacturer_ID2 = temp;
+	if(DCMI_SingleRandomRead(OV7725_VER,&temp)!=0)
 		return 0xff;
-	OV7670ID->Version = temp;
-	if(DCMI_SingleRandomRead(OV7670_PID,&temp)!=0)
+	OV7725ID->Version = temp;
+	if(DCMI_SingleRandomRead(OV7725_PID,&temp)!=0)
 		return 0xff;
-	OV7670ID->PID = temp;
+	OV7725ID->PID = temp;
 
 	return 0;
 }
@@ -297,7 +301,7 @@ uint8_t DCMI_OV7670_ReadID(OV7670_IDTypeDef* OV7670ID)
   *			//(272,16,320,240) is good for QVGA
   * @retval None
   */
-void OV7670_config_window(uint16_t startx, uint16_t starty, uint16_t width, uint16_t height)
+void OV7725_config_window(uint16_t startx, uint16_t starty, uint16_t width, uint16_t height)
 {
 	uint16_t endx=(startx+width);
 	uint16_t endy=(starty+height*2);// must be "height*2"

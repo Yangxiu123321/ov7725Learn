@@ -35,10 +35,14 @@
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\dcmi_ov7670.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\output\dcmi_ov7670.o: ..\User\LCD\LCD.h
+.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\dcmi_ov7670.o: ..\User\config.h
+.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\dcmi_ov7670.o: ..\User\LCD/AsciiLib.h
+.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
 .\output\dcmi_ov7670.o: ..\User\stm32f4xx_it.h
 .\output\dcmi_ov7670.o: ..\User\camera/picture.h
 .\output\dcmi_ov7670.o: ..\User\camera/dcmi_OV7670.h
 .\output\dcmi_ov7670.o: ..\User\camera/SCCB.h
-.\output\dcmi_ov7670.o: ..\User\config.h
-.\output\dcmi_ov7670.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\dcmi_ov7670.o: ..\User\camera/DCMI_OV7670_INITTABLE.h

@@ -37,6 +37,7 @@
 .\output\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\stm32f4xx_it.o: ..\User\config.h
+.\output\stm32f4xx_it.o: ..\User\camera\camera.h
 .\output\stm32f4xx_it.o: ..\User\LCD/LCD.h
 .\output\stm32f4xx_it.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\stm32f4xx_it.o: ..\User\LCD/AsciiLib.h

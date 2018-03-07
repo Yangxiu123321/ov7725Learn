@@ -143,14 +143,14 @@ static void LCD_FSMCConfig(void)
 //	FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure); 
 
 
-	/* FSMCĞ´ËÙ¶ÈÉèÖÃ */
-	FSMC_NORSRAMTimingInitStructure.FSMC_AddressSetupTime = 20;//1;   /* µØÖ·½¨Á¢Ê±¼ä  */
+	/* FSMCå†™é€Ÿåº¦è®¾ç½® */
+	FSMC_NORSRAMTimingInitStructure.FSMC_AddressSetupTime = 20;//1;   /* åœ°å€å»ºç«‹æ—¶é—´  */
 	FSMC_NORSRAMTimingInitStructure.FSMC_AddressHoldTime = 0;	   
-	FSMC_NORSRAMTimingInitStructure.FSMC_DataSetupTime = 20;//1;	   /* Êı¾İ½¨Á¢Ê±¼ä  */
+	FSMC_NORSRAMTimingInitStructure.FSMC_DataSetupTime = 20;//1;	   /* æ•°æ®å»ºç«‹æ—¶é—´  */
 	FSMC_NORSRAMTimingInitStructure.FSMC_BusTurnAroundDuration = 0x00;
 	FSMC_NORSRAMTimingInitStructure.FSMC_CLKDivision = 0x00;
 	FSMC_NORSRAMTimingInitStructure.FSMC_DataLatency = 0x00;
-	FSMC_NORSRAMTimingInitStructure.FSMC_AccessMode = FSMC_AccessMode_A;	/* FSMC ·ÃÎÊÄ£Ê½ */
+	FSMC_NORSRAMTimingInitStructure.FSMC_AccessMode = FSMC_AccessMode_A;	/* FSMC è®¿é—®æ¨¡å¼ */
 	FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &FSMC_NORSRAMTimingInitStructure;	  
 	
 	FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure); 
@@ -756,12 +756,12 @@ void LCD_Initializtion(void)
 		LCD_WriteReg(0x0061,0x0003);	  /* Driver Output Control */
 		LCD_WriteReg(0x006A,0x0000);	  /* Vertical Scroll Control */
 		
-		LCD_WriteReg(0x0080,0x0000);	  /* Display Position ¨C Partial Display 1 */
-		LCD_WriteReg(0x0081,0x0000);	  /* RAM Address Start ¨C Partial Display 1 */
+		LCD_WriteReg(0x0080,0x0000);	  /* Display Position â€“ Partial Display 1 */
+		LCD_WriteReg(0x0081,0x0000);	  /* RAM Address Start â€“ Partial Display 1 */
 		LCD_WriteReg(0x0082,0x0000);	  /* RAM address End - Partial Display 1 */
-		LCD_WriteReg(0x0083,0x0000);	  /* Display Position ¨C Partial Display 2 */
-		LCD_WriteReg(0x0084,0x0000);	  /* RAM Address Start ¨C Partial Display 2 */
-		LCD_WriteReg(0x0085,0x0000);	  /* RAM address End ¨C Partail Display2 */
+		LCD_WriteReg(0x0083,0x0000);	  /* Display Position â€“ Partial Display 2 */
+		LCD_WriteReg(0x0084,0x0000);	  /* RAM Address Start â€“ Partial Display 2 */
+		LCD_WriteReg(0x0085,0x0000);	  /* RAM address End â€“ Partail Display2 */
 		LCD_WriteReg(0x0090,0x0013);	  /* Frame Cycle Control */
 		LCD_WriteReg(0x0092,0x0000); 	  /* Panel Interface Control 2 */
 		LCD_WriteReg(0x0093,0x0003);	  /* Panel Interface control 3 */
@@ -1355,7 +1355,7 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
 * Return         : None
 * Attention		 : None
 *******************************************************************************/
-void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor)//¿í8 ¸ß16
+void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor)//å®½8 é«˜16
 {
     uint8_t TempChar;
     do
@@ -1492,15 +1492,15 @@ __inline uint16_t LCD_ReadReg(uint16_t LCD_Reg)
 void GUI_Num(uint16_t Xpos, uint16_t Ypos, int16_t number,uint16_t Color, uint16_t bkColor)
 {
     uint8_t TempChar[3],idx=0;
-	  if((number>999)||(number<0))//³¬³ö0~999·¶Î§
+	  if((number>999)||(number<0))//è¶…å‡º0~999èŒƒå›´
 		{
 			TempChar[0]=TempChar[1]=TempChar[2]='*';
 		}
 		else
 		{
-			TempChar[2] = number%10+'0';//¸öÎ»
-			TempChar[1] = number/10%10+'0';//Ê®Î»
-			TempChar[0] = number/10/10%10+'0';//°ÙÎ»	
+			TempChar[2] = number%10+'0';//ä¸ªä½
+			TempChar[1] = number/10%10+'0';//åä½
+			TempChar[0] = number/10/10%10+'0';//ç™¾ä½	
 		}
 		
 		

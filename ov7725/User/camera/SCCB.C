@@ -63,8 +63,8 @@ void SCCB_GPIO_Config(void)
 
 /**
   * @brief  Writes a byte at a specific Camera register
-  * @param  Device: OV7670 write address.
-  * @param  Addr: OV7670 register address. 
+  * @param  Device: OV7725 write address.
+  * @param  Addr: OV7725 register address. 
   * @param  Data: data to be written to the specific register 
   * @retval 0x00 if write operation is OK. 
   *         0xFF if timeout condition occured (device not connected or bus error).
@@ -85,7 +85,7 @@ uint8_t DCMI_SingleRandomWrite(uint8_t Reg, uint8_t Data)
   }
    /*-----------------------------------------------------------------------------------*/
   /* Send DCMI selcted device slave Address for write */
-  I2C_Send7bitAddress(Open207V_SCCB, OV7670_DEVICE_WRITE_ADDRESS, I2C_Direction_Transmitter);
+  I2C_Send7bitAddress(Open207V_SCCB, OV7725_DEVICE_WRITE_ADDRESS, I2C_Direction_Transmitter);
  
   /* Test on I2C2 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */
@@ -126,8 +126,8 @@ uint8_t DCMI_SingleRandomWrite(uint8_t Reg, uint8_t Data)
 
 /**
   * @brief  Reads a byte from a specific Camera register 
-  * @param  Device: OV7670 write address.
-  * @param  Addr: OV7670 register address. 
+  * @param  Device: OV7725 write address.
+  * @param  Addr: OV7725 register address. 
   * @retval data read from the specific register or 0xFF if timeout condition 
   *         occured. 
   */
@@ -150,7 +150,7 @@ uint8_t DCMI_SingleRandomRead(uint8_t Reg, uint8_t *Data)
   } 
   /*-----------------------------------------------------------------------------------*/
   /* Send DCMI selcted device slave Address for write */
-  I2C_Send7bitAddress(Open207V_SCCB, OV7670_DEVICE_READ_ADDRESS, I2C_Direction_Transmitter);
+  I2C_Send7bitAddress(Open207V_SCCB, OV7725_DEVICE_READ_ADDRESS, I2C_Direction_Transmitter);
  
   /* Test on I2C2 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */
@@ -190,7 +190,7 @@ uint8_t DCMI_SingleRandomRead(uint8_t Reg, uint8_t *Data)
   } 
   /*-----------------------------------------------------------------------------------*/
   /* Send DCMI selcted device slave Address for write */
-  I2C_Send7bitAddress(Open207V_SCCB, OV7670_DEVICE_READ_ADDRESS, I2C_Direction_Receiver);
+  I2C_Send7bitAddress(Open207V_SCCB, OV7725_DEVICE_READ_ADDRESS, I2C_Direction_Receiver);
    
   /* Test on I2C2 EV6 and clear it */
   timeout = DCMI_TIMEOUT_MAX; /* Initialize timeout value */

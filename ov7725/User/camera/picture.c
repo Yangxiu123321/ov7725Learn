@@ -10,18 +10,18 @@
 
 
 __IO uint16_t  g_ColorData16t[40][320];
-__IO uint16_t  g_ColorData16t_debug[5][320]={0};//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-__IO uint16_t  g_ColorData16t_ROI[5][10]={0};//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-__IO uint16_t  g_ColorData16t_deal[5][320]={0};//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
+__IO uint16_t  g_ColorData16t_debug[5][320]={0};//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+__IO uint16_t  g_ColorData16t_ROI[5][10]={0};//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+__IO uint16_t  g_ColorData16t_deal[5][320]={0};//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
 
 
-q31_t  g_ColorDataRRR8t[SIMPLE_LINE][320]={0};//8Î»RGBÖµR·ÖÁ¿
-q31_t  g_ColorDataGGG8t[SIMPLE_LINE][320]={0};//8Î»RGBÖµG·ÖÁ¿
-q31_t  g_ColorDataBBB8t[SIMPLE_LINE][320]={0};//8Î»RGBÖµB·ÖÁ¿
+q31_t  g_ColorDataRRR8t[SIMPLE_LINE][320]={0};//8ä½RGBå€¼Råˆ†é‡
+q31_t  g_ColorDataGGG8t[SIMPLE_LINE][320]={0};//8ä½RGBå€¼Gåˆ†é‡
+q31_t  g_ColorDataBBB8t[SIMPLE_LINE][320]={0};//8ä½RGBå€¼Båˆ†é‡
 
-q31_t  g_ColorDataRRR8t_ROI[5][10]={0};//8Î»RGBÖµR·ÖÁ¿
-q31_t  g_ColorDataGGG8t_ROI[5][10]={0};//8Î»RGBÖµG·ÖÁ¿
-q31_t  g_ColorDataBBB8t_ROI[5][10]={0};//8Î»RGBÖµB·ÖÁ¿  
+q31_t  g_ColorDataRRR8t_ROI[5][10]={0};//8ä½RGBå€¼Råˆ†é‡
+q31_t  g_ColorDataGGG8t_ROI[5][10]={0};//8ä½RGBå€¼Gåˆ†é‡
+q31_t  g_ColorDataBBB8t_ROI[5][10]={0};//8ä½RGBå€¼Båˆ†é‡  
 
 q31_t dspq31t_buffer0[320]={0};
 q31_t dspq31t_buffer1[320]={0};
@@ -69,7 +69,7 @@ static CanTxMsg TxMessage=
   {0}/*uint8_t Data[8]; !< Contains the data to be transmitted. It ranges from 0 
                         to 0xFF. */
 }
-;//CAN·¢ËÍÏûÏ¢
+;//CANå‘é€æ¶ˆæ¯
 union Cameradata
 {
 	int16_t  data_16b;
@@ -271,7 +271,7 @@ void SendDataToPC(void)
 	       if(ii++==200)
 				 {
 						 DCMI_CaptureCmd(DISABLE);
-	// 					//·¢ËÍr
+	// 					//å‘é€r
 						printf("rrrrrr");
 						printf("\n");					
 						for(i=0;i<5;i++)
@@ -285,7 +285,7 @@ void SendDataToPC(void)
 						}
 						
 
-						//·¢ËÍg
+						//å‘é€g
 						printf("gggggg");
 						printf("\n");					
 						for(i=0;i<5;i++)
@@ -298,7 +298,7 @@ void SendDataToPC(void)
 
 						}
 
-						//·¢ËÍb
+						//å‘é€b
 						printf("bbbbbb");
 						printf("\n");					
 						for(i=0;i<5;i++)
@@ -315,7 +315,7 @@ void SendDataToPC(void)
 #define white 1
 #define black 0
 #define magenta 2
-uint16_t j=0,k=0;//Ñ­»·ÓÃ
+uint16_t j=0,k=0;//å¾ªç¯ç”¨
 
 uint8_t state=0;///,jump=0,nextone=0
 //extern uint16_t canuse;
@@ -361,13 +361,13 @@ void SeeSmallCar(void)
 //			coloBBB[jj]=((g_ColorData16t[chuliline][jj]&0x1f)<<3)|(g_ColorData16t[chuliline][jj]&0x07);			
 //		}
 		//arm_add_q31(&coloRRR[0],&coloGGG[0],dspq31t_buffer1,320);
-		//arm_add_q31(dspq31t_buffer1,&coloBBB[0],dspq31t_buffer1,320);//ºÍ¼ÆËã¸øbuffer1
+		//arm_add_q31(dspq31t_buffer1,&coloBBB[0],dspq31t_buffer1,320);//å’Œè®¡ç®—ç»™buffer1
 		
-		//ÇóS
+		//æ±‚S
 //		arm_min_q31_action(&coloRRR[0],&coloGGG[0],dspq31t_buffer2,320);
 //		arm_min_q31_action(&coloBBB[0],dspq31t_buffer2,dspq31t_buffer2,320);
 //		arm_mult_q31_signle(dspq31t_buffer2,&mult,dspq31t_buffer2,320);	
-//		arm_div_q31_signle(dspq31t_buffer2,dspq31t_buffer1,dspq31t_buffer2,320);	//¼ÆËãºóÈ«¸øbuffer2ÁË
+//		arm_div_q31_signle(dspq31t_buffer2,dspq31t_buffer1,dspq31t_buffer2,320);	//è®¡ç®—åå…¨ç»™buffer2äº†
 
 		for(jj=0;jj<320;jj++)
 		{			
@@ -433,7 +433,7 @@ void SeeSmallCar(void)
 	recordline=replaceline;
 }
 	
-//RGBÔ­Ê¼²É¼¯µÄÑÕÉ«Êä³ö
+//RGBåŸå§‹é‡‡é›†çš„é¢œè‰²è¾“å‡º
 //		LCD_SetCursor(0,144);
 //		LCD_REG = 0x0022;	
 //		for(k=0;k<5;k++)
@@ -442,7 +442,7 @@ void SeeSmallCar(void)
 //			LCD_RAM =g_ColorData16t_deal[k][j];			
 //		}
 				
-//½«µÚÒ»´Î´¦ÀíµÄÊä³öÔÚÆÁÉÏ
+//å°†ç¬¬ä¸€æ¬¡å¤„ç†çš„è¾“å‡ºåœ¨å±ä¸Š
 //		LCD_SetCursor(0,164);
 //		LCD_REG = 0x0022;	
 //		for(k=0;k<5;k++)
@@ -478,7 +478,7 @@ void SendData(void)
 {
 	uint8_t mbox;
 	mbox= CAN_Transmit(CAN1, &TxMessage);         //1.4us	
-	while((CAN_TransmitStatus(CAN1, mbox)!= CAN_TxStatus_Ok));//µÈ´ı238us
+	while((CAN_TransmitStatus(CAN1, mbox)!= CAN_TxStatus_Ok));//ç­‰å¾…238us
 }
 
 	

@@ -23,16 +23,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
+#include "camera.h"
 #include "LCD/LCD.h"
 #include "stm32f4xx_can.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_dma.h"
+#include "stm32f4xx_tim.h"
 #include "stm32f4xx_dcmi.h"
 #include "stm32f4xx_usart.h"
 #include "camera/picture.h"
 
 
 #define USARTx_IRQHANDLER   USART1_IRQHandler
+
+
+extern camera_t OV;
 /** @addtogroup STM32F4xx_StdPeriph_Examples
   * @{
   */
@@ -71,6 +76,7 @@ void HardFault_Handler(void)
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
   {
+			GUI_Text(100,200,"Camera Init..",White,Blue);
   }
 }
 
@@ -153,12 +159,43 @@ void SysTick_Handler(void)
 	TimingDelay_Decrement();
 }
 
-/******************************************************************************/
-/*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
-/*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f4xx.s).                                               */
-/******************************************************************************/
+
+/**
+  * @brief  This function TIM2 Handler.
+  * @param  None
+  * @retval None
+  */
+void TIM3_IRQHandler(void)
+{
+	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
+	{
+		OV.frame.timeCount++;
+	}
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+}
+
+
+
+/**
+  * @brief  This function TIM2 Handler.
+  * @param  None
+  * @retval None
+  */
+void TIM2_IRQHandler(void)
+{
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET)
+	{
+		OV.frame.fpsOutFlag = 1;
+	}
+	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+}
+
+
+/**
+  * @brief  This function USART3 Handler.
+  * @param  None
+  * @retval None
+  */
 void USARTx_IRQHANDLER(void)
 {
   if(USART_GetITStatus(Open207V_USART, USART_IT_RXNE) != RESET)
@@ -168,10 +205,10 @@ void USARTx_IRQHANDLER(void)
   }
 }
 
-extern __IO uint16_t  g_ColorData16t[40][320];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-extern __IO uint16_t  g_ColorData16t_ROI[10][10];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-extern __IO uint16_t  g_ColorData16t_deal[10][320];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-uint16_t camer_lines=0,camer_lines_4=0;//ÉÏµçÊ±Ä¬ÈÏ¿´Ô¶·½  ÔÚ¹ÕÍäÊ±¸Ä±ä´ËÖµ ÔÚÖĞ¶ÏÀï
+extern __IO uint16_t  g_ColorData16t[40][320];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+extern __IO uint16_t  g_ColorData16t_ROI[10][10];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+extern __IO uint16_t  g_ColorData16t_deal[10][320];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+uint16_t camer_lines=0,camer_lines_4=0;//ä¸Šç”µæ—¶é»˜è®¤çœ‹è¿œæ–¹  åœ¨æ‹å¼¯æ—¶æ”¹å˜æ­¤å€¼ åœ¨ä¸­æ–­é‡Œ
 uint8_t cameralineschange='b';
 
 
@@ -181,27 +218,9 @@ uint16_t replaceline=0;
 uint16_t shuzu[320]={0}; 
 void DCMI_IRQHandler(void)
 {
-	static uint16_t j=0,i=0;
+	static uint16_t i=0;
 	if (DCMI_GetITStatus(DCMI_IT_VSYNC) != RESET) 
 	{
-//		if(cameralineschange==0)
-//		{
-//			;
-//		}
-//		else if(cameralineschange=='b')//½ü¾°
-//		{
-//			cameralineschange=0;
-//			camer_lines=126;
-//			camer_lines_4=0;
-//		}
-//		else if(cameralineschange=='c')//Ô¶¾°
-//		{
-//			cameralineschange=0;
-//			camer_lines=131-25;//Ô¶¾°
-//			camer_lines_4=15 ;
-//		}
-// 		j=0;
-		//new frame start
 		canuse=0;
 		start=1;
 		DCMI_ClearITPendingBit(DCMI_IT_VSYNC); 
@@ -209,11 +228,6 @@ void DCMI_IRQHandler(void)
 	
 	if(DCMI_GetITStatus(DCMI_IT_LINE) != RESET) 
 	{
-//		j++;
-//		if(j==camer_lines)//µÚ22ĞĞ½áÊøºó¿ªÊ¼È¡µÚ10~20ĞĞÍ¼ÏñÊı¾İ  ÖµÔ½Ğ¡£¬Ô½¿¿Ç°  Ô¶100(33cm)   ½ü220(20cm)
-//		{
-//			g_DCMI_IT_FRAME_FLAG=0;		
-//	  }
 		if(start==1)
 		{
 			canuse++;replaceline=canuse-1;
@@ -223,12 +237,13 @@ void DCMI_IRQHandler(void)
 		{
 			i=0;
 		}
-		g_DCMI_IT_FRAME_FLAG=0;	
+		//g_DCMI_IT_FRAME_FLAG=0;	
 		DCMI_ClearITPendingBit(DCMI_IT_LINE); 			  
 	}
 	
 	if (DCMI_GetITStatus(DCMI_IT_FRAME) != RESET) 
 	{
+		OV.frame.frameNum++;
 		DCMI_ClearITPendingBit(DCMI_IT_FRAME);
 	}
 	if (DCMI_GetITStatus(DCMI_IT_ERR) != RESET) 
@@ -236,7 +251,7 @@ void DCMI_IRQHandler(void)
 		DCMI_ClearITPendingBit(DCMI_IT_ERR);
 	}
 }
-//´®¿Ú½ÓÊÕÖÕ¶Ë
+//ä¸²å£æ¥æ”¶ç»ˆç«¯
 void USART3_IRQHandler(void)
 {
 	 uint8_t buffer=0;
@@ -249,7 +264,7 @@ void USART3_IRQHandler(void)
 
 
 
-//CAN½ÓÊÜÖĞ¶Ï ºÍÖ÷¿ØÍ¨ĞÅ
+//CANæ¥å—ä¸­æ–­ å’Œä¸»æ§é€šä¿¡
 void CAN1_RX0_IRQHandler(void)
 {
 	CanRxMsg RxMessage;
@@ -260,9 +275,9 @@ void CAN1_RX0_IRQHandler(void)
 		CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);				//reveive data	
 		CAN_ClearITPendingBit(CAN1,CAN_IT_FMP0);
 		
-// 	  if(RxMessage.StdId==0x25)//Ö÷¿ØµØÖ·
+// 	  if(RxMessage.StdId==0x25)//ä¸»æ§åœ°å€
 // 		{
-// 			if(RxMessage.Data[0]=='b')//Ö÷¿Ø·¢À´ÏûÏ¢¿´½ü¾°
+// 			if(RxMessage.Data[0]=='b')//ä¸»æ§å‘æ¥æ¶ˆæ¯çœ‹è¿‘æ™¯
 // 			{
 // 				cameralineschange='b';
 // 			}
@@ -279,15 +294,19 @@ void CAN1_RX0_IRQHandler(void)
 	
 }
 
+/**
+  * @brief  This function DMA2_Stream1_IRQHandler.
+  * @param  None
+  * @retval None
+  */
 void DMA2_Stream1_IRQHandler(void)
 {
 
 	  if(DMA_GetITStatus(DMA2_Stream1, DMA_IT_TCIF1))
     {
-			
-
-        DMA_ClearFlag(DMA2_Stream1, DMA_IT_TCIF1);
-        DMA_ClearITPendingBit(DMA2_Stream1, DMA_IT_TCIF1);	
+			OV.frame.dcmiItNum++;
+			DMA_ClearFlag(DMA2_Stream1, DMA_IT_TCIF1);
+			DMA_ClearITPendingBit(DMA2_Stream1, DMA_IT_TCIF1);	
     }
 }
 /**

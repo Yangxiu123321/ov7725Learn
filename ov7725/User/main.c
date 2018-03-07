@@ -22,7 +22,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "can.h"
 #include "misc.h"
+#include "timer.h"
 #include "usart.h"
+#include "camera.h"
 #include "rodata.h"
 #include "LCD/LCD.h"
 #include "arm_math.h"
@@ -32,7 +34,7 @@
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_dcmi.h"
 #include "stm32f4xx_gpio.h"
-#include "camera/dcmi_OV7670.h"
+#include "camera/dcmi_OV7725.h"
 #include "camera/picture.h"
 
 
@@ -49,13 +51,13 @@ void LCD_CS_ResetBits(void);
 void Delay(__IO uint32_t nTime);
 void TimingDelay_Decrement(void);
 static __IO uint32_t TimingDelay;
-__IO int16_t g_DCMI_IT_FRAME_FLAG=0;//ÊÇ·ñ²¶»ñĞÂµÄÒ»Ö¡Í¼Ïñ±êÖ¾
+__IO int16_t g_DCMI_IT_FRAME_FLAG=0;//æ˜¯å¦æ•è·æ–°çš„ä¸€å¸§å›¾åƒæ ‡å¿—
 
 extern  q31_t  ROI_R,ROI_G,ROI_B;
 extern  uint32_t ROI_RGB_mod;
-extern __IO uint16_t  g_ColorData16t[40][320];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-extern __IO uint16_t  g_ColorData16t_ROI[5][10];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
-extern __IO uint16_t  g_ColorData16t_deal[5][320];//DCMI½Ó¿Ú²É¼¯Ô­Ê¼Êı¾İÄÚ´æ
+extern __IO uint16_t  g_ColorData16t[40][320];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+extern __IO uint16_t  g_ColorData16t_ROI[5][10];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
+extern __IO uint16_t  g_ColorData16t_deal[5][320];//DCMIæ¥å£é‡‡é›†åŸå§‹æ•°æ®å†…å­˜
 extern uint16_t camer_lines_4;
 
 
@@ -64,6 +66,8 @@ extern uint16_t camer_lines_4;
   * @param  None
   * @retval None
   */
+camera_t OV;
+	
 uint16_t fps_time=0;
 extern __IO uint16_t canuse;
 extern uint16_t start;
@@ -75,8 +79,6 @@ uint16_t jj1=0;
 int main(void)
 {	
 	RCC_ClocksTypeDef SYS_Clocks;
-	int16_t i=0,ii=0;
-	uint16_t fps=0;
 	uint16_t jj=0;
 	GPIO_InitTypeDef GPIO_InitStructure;
 	static uint16_t yushu=0,cmline=0;
@@ -95,7 +97,7 @@ int main(void)
 	RCC_GetClocksFreq(&SYS_Clocks);
 
 		
-	//I/O¿ÚÉèÖÃ ÓÃÓÚ²é¿´´úÂëÔËĞĞÊ±¼ä
+	//I/Oå£è®¾ç½® ç”¨äºæŸ¥çœ‹ä»£ç è¿è¡Œæ—¶é—´
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 		
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
@@ -106,23 +108,26 @@ int main(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_1);
 		
-	//ÄÚ´æÀ©Õ¹³¢ÊÔ£¡£¡£¡
+	//å†…å­˜æ‰©å±•å°è¯•ï¼ï¼ï¼
 
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 
 
-	/*ÉèÖÃ´®ĞĞ¿Ú 115200*/
+	/*è®¾ç½®ä¸²è¡Œå£ 115200*/
 	USART_Configuration();
-	/*ÉèÖÃLCDÏÔÊ¾ÆÁ*/
+	/*è®¾ç½®LCDæ˜¾ç¤ºå±*/
 	LCD_Initializtion();
-	/*½«ÏÔÊ¾ÆÁµ×É«ÉèÖÃÎªºìÉ«*/
+	/*å°†æ˜¾ç¤ºå±åº•è‰²è®¾ç½®ä¸ºçº¢è‰²*/
 	LCD_Clear(Red);
+	/*è®¾ç½®1så®šæ—¶å™¨ç”¨äºè®¡ç®—å¸§ç‡*/
+	TIM_Init(TIM2,10000-1,8400-1,1,1);
+	/*è®¾ç½®1mså®šæ—¶å™¨ç”¨äºè®¡ç®—ç¨‹åºå‘¨æœŸ*/
+	TIM_Init(TIM3,1000-1,84-1,1,1);
 		
-		
-  /*µ÷ÊÔĞÅÏ¢Êä³ö*/
+  /*è°ƒè¯•ä¿¡æ¯è¾“å‡º*/
 //	GUI_Text(100,200,"Camera Init..",White,Blue);
 
-	/*ÅäÖÃÉãÏñÍ·¼Ä´æÆ÷*/
+	/*é…ç½®æ‘„åƒå¤´å¯„å­˜å™¨*/
 	if(DCMI_OV7725_Init()!=0)
 	{
 		USART_OUT(USART3,"Camera Init fails!!");		
@@ -130,11 +135,11 @@ int main(void)
 //		GUI_Text(100,200,"Camera Init fails!!",White,Blue);
 	else
 	{
-		USART_OUT(USART3,"Camera Init Ok!!");
+		USART_OUT(USART3,"Camera Init Ok!!\r\n");
 	}
 //		GUI_Text(100,200,"Camera Init Ok!!",White,Blue);
 	/*Set LCD direction*/		
-	LCD_WriteReg(0x0011,0x6068);//ÊÓ½Ç¹²53¶È  Ò»Ãæ26¶È
+	LCD_WriteReg(0x0011,0x6068);//è§†è§’å…±53åº¦  ä¸€é¢26åº¦
 	LCD_SetCursor(0,0);
 	Prepare_Write_RAM();
 																										  
@@ -151,31 +156,35 @@ int main(void)
 //	GUI_Text(100,220,"Camera AEC_Fun...",White,Blue);//240*320
 	USART_OUT(USART3,"Camera AEC_Fun...");		
 			
-			
- 	/*×Ô¶¯ÆØ¹âÉèÖÃ*/
+
+ 	/*è‡ªåŠ¨æ›å…‰è®¾ç½®*/
  	//AEC_WHITE_Fun();
 	
-  //PA11 PA12CAN½Ó¿Ú
+  //PA11 PA12CANæ¥å£
   // CamreaCanInit();
 	 Delay(100);
 	 
-//   SendAllReadyToCar();//·¢ËÍ³õÊ¼»¯Íê³ÉĞÅÏ¢
+	// SendAllReadyToCar();//å‘é€åˆå§‹åŒ–å®Œæˆä¿¡æ¯
 	
   g_DCMI_IT_FRAME_FLAG=2;
 	
-	fps_time=0;//¼ÆËãÖ¡ÂÊ±äÁ¿
+	fps_time=0;//è®¡ç®—å¸§ç‡å˜é‡
   extern uint8_t graypixel[PIXEL_H][PIXEL_W];
-	while(1)//¼ÓDSPºó×ÜÔËĞĞ3.7ms!!!!!!!!!
+	while(1)//åŠ DSPåæ€»è¿è¡Œ3.7ms!!!!!!!!!
 	{
-		static uint8_t CANSendData1[8]={2};
 		static int timeCount=0;
-		while(g_DCMI_IT_FRAME_FLAG!=0){};//µÈ´ıÊ¶±ğÌõµ½À´
-    g_DCMI_IT_FRAME_FLAG=2;
+		//while(g_DCMI_IT_FRAME_FLAG!=0){};//ç­‰å¾…è¯†åˆ«æ¡åˆ°æ¥
+    //g_DCMI_IT_FRAME_FLAG=2;
+		frameSpeedOut();
+		OV.frame.timeCount = 0;	
 		if(start==1)
 		{
-			//Itera_Threshold();
+			//USART_OUT(USART3,"Camera AEC_Fun...");
+					
+			Itera_Threshold();
+	
 			//GUI_Text(100,200,(uint8_t*)"Ok!!",White,Blue);
-			//GUI_Text_variables(100,200,White,Blue,canuse);
+			//GUI_Text_variables(100,230,White,Blue,canuse);
 			yushu=(canuse%40);
 			if(yushu==1) 
 			{
@@ -204,38 +213,12 @@ int main(void)
 				for(jj=0;jj<320;jj++)
 				{
 					LCD_RAM=g_ColorData16t[cmline][jj];
-				}
-/********************************************/			
-		timeCount++;
-		//µ÷ÊÔº¯Êı
-		if(timeCount>10000)
-		{
-			//USART_OUT(USART3,"%d\t",);
-			//CAN_TxMsg(CAN1,1,CANSendData1,1);
-			timeCount=0;
-		}	
-	//SeeSmallCar();	
-	
-   }
-
-
-// 				  
-				
-// // 				/*µ÷ÊÔÓÃ*/
-//           SendDataToPC();
-	
-			     //¼ÆËãÖ¡ÂÊ
-//				   fps++;
-//				   if(fps_time>1000)
-//					 {
-//						 GUI_Num(21*8, 104, fps,Black,Red);
-//						 fps=fps_time=0;
-//					 }	
-
+				}	
+			}
 		
-//   					SendData();
-	}
-}
+		}
+		OV.frame.timeCountOut = OV.frame.timeCount;
+	}	
 }
 void Delay(__IO uint32_t nTime)
 { 

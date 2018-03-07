@@ -35,9 +35,11 @@
 .\output\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\output\main.o: ..\User\timer.h
 .\output\main.o: ..\User\usart.h
 .\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\main.o: ..\User\config.h
+.\output\main.o: ..\User\camera\camera.h
 .\output\main.o: ..\Tool\rodata.h
 .\output\main.o: ..\User\LCD/LCD.h
 .\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
@@ -46,6 +48,6 @@
 .\output\main.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\output\main.o: ..\Tool\Imtrans.h
-.\output\main.o: ..\User\camera/dcmi_OV7670.h
+.\output\main.o: ..\User\camera/dcmi_OV7725.h
 .\output\main.o: ..\User\camera/SCCB.h
 .\output\main.o: ..\User\camera/picture.h

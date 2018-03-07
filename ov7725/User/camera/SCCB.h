@@ -30,8 +30,8 @@
    You may modify these timeout values depending on CPU frequency and application
    conditions (interrupts routines ...). */   
 #define SCCB_Open207V_FLAG_TIMEOUT         10000
-#define OV7670_DEVICE_WRITE_ADDRESS    0x42
-#define OV7670_DEVICE_READ_ADDRESS     0x43
+#define OV7725_DEVICE_WRITE_ADDRESS    0x42
+#define OV7725_DEVICE_READ_ADDRESS     0x43
 
 
 #define SCCB_SPEED               100000
