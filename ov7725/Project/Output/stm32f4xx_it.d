@@ -1,9 +1,9 @@
 .\output\stm32f4xx_it.o: ..\User\stm32f4xx_it.c
 .\output\stm32f4xx_it.o: ..\User\usart.h
-.\output\stm32f4xx_it.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\stm32f4xx_it.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\stm32f4xx_it.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\stm32f4xx_it.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\stm32f4xx_it.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\stm32f4xx_it.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\stm32f4xx_it.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\stm32f4xx_it.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\stm32f4xx_it.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -38,9 +38,10 @@
 .\output\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\stm32f4xx_it.o: ..\User\config.h
 .\output\stm32f4xx_it.o: ..\User\camera\camera.h
+.\output\stm32f4xx_it.o: ..\User\EasyTrace\EasyTracer.h
 .\output\stm32f4xx_it.o: ..\User\LCD/LCD.h
-.\output\stm32f4xx_it.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\stm32f4xx_it.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\stm32f4xx_it.o: ..\User\LCD/AsciiLib.h
-.\output\stm32f4xx_it.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\stm32f4xx_it.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
 .\output\stm32f4xx_it.o: ..\User\stm32f4xx_it.h
 .\output\stm32f4xx_it.o: ..\User\camera/picture.h

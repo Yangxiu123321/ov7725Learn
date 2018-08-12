@@ -10,7 +10,7 @@
 //#define GETG_FROM_RGB16(RGB565) (((RGB565 >> 5) & 0x3f) << 2) | (((RGB565 >> 5) & 0x3f) & 0x03);
 //#define GETB_FROM_RGB16(RGB565) ((RGB565&0x1f)<<3)|(RGB565&0x07)
 //原始数据高度
-#define PIXEL_H 40
+ #define PIXEL_H 40
 //定义原始数据宽度
 #define PIXEL_W 320
 //阈值允许参数

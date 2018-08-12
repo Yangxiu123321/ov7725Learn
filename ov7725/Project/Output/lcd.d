@@ -1,9 +1,9 @@
 .\output\lcd.o: ..\User\LCD\LCD.c
 .\output\lcd.o: ..\User\LCD/LCD.h
-.\output\lcd.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\lcd.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\lcd.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\lcd.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\lcd.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\lcd.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\lcd.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\lcd.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\lcd.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -37,6 +37,6 @@
 .\output\lcd.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\lcd.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\lcd.o: ..\User\config.h
-.\output\lcd.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\lcd.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\lcd.o: ..\User\LCD/AsciiLib.h
-.\output\lcd.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\lcd.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\string.h

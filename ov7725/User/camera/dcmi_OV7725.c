@@ -23,6 +23,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "misc.h"
 #include "LCD.h"
+#include "camera.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_rcc.h"
@@ -34,7 +35,7 @@
 #include "camera/DCMI_OV7725_INITTABLE.h"
 
 
-extern __IO uint16_t g_ColorData16t[SIMPLE_LINE][320];//DCMI接口采集原始数据内存
+extern camera_t OV;
 /** @addtogroup DCMI_OV7725_Camera
   * @{
   */
@@ -169,7 +170,7 @@ void DCMI_Config(void)
 
   DMA_InitStructure.DMA_Channel = DMA_Channel_1;  
   DMA_InitStructure.DMA_PeripheralBaseAddr = DCMI_DR_ADDRESS;	
-  DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)g_ColorData16t;
+  DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)OV.gImageRGB;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
   DMA_InitStructure.DMA_BufferSize = 20*320;
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;

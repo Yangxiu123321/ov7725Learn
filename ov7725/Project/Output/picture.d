@@ -2,7 +2,7 @@
 .\output\picture.o: ..\User\camera\picture.h
 .\output\picture.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\picture.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\picture.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -36,12 +36,12 @@
 .\output\picture.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\picture.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\picture.o: ..\User\config.h
-.\output\picture.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\picture.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\picture.o: ..\User\camera/SCCB.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\picture.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\picture.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
-.\output\picture.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\picture.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\picture.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\picture.o: ..\User\LCD/LCD.h
 .\output\picture.o: ..\User\LCD/AsciiLib.h
 .\output\picture.o: ..\User\usart.h

@@ -79,9 +79,7 @@ uint16_t jj1=0;
 int main(void)
 {	
 	RCC_ClocksTypeDef SYS_Clocks;
-	uint16_t jj=0;
 	GPIO_InitTypeDef GPIO_InitStructure;
-	static uint16_t yushu=0,cmline=0;
 
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
@@ -123,9 +121,6 @@ int main(void)
 	TIM_Init(TIM2,10000-1,8400-1,1,1);
 	/*设置1ms定时器用于计算程序周期*/
 	TIM_Init(TIM3,1000-1,84-1,1,1);
-		
-  /*调试信息输出*/
-//	GUI_Text(100,200,"Camera Init..",White,Blue);
 
 	/*配置摄像头寄存器*/
 	if(DCMI_OV7725_Init()!=0)
@@ -154,7 +149,7 @@ int main(void)
   DCMI_CaptureCmd(ENABLE);
 	Delay(500);
 //	GUI_Text(100,220,"Camera AEC_Fun...",White,Blue);//240*320
-	USART_OUT(USART3,"Camera AEC_Fun...");		
+	USART_OUT(USART3,"Camera AEC_Fun...\n");		
 			
 
  	/*自动曝光设置*/
@@ -172,50 +167,16 @@ int main(void)
   extern uint8_t graypixel[PIXEL_H][PIXEL_W];
 	while(1)//加DSP后总运行3.7ms!!!!!!!!!
 	{
-		static int timeCount=0;
-		//while(g_DCMI_IT_FRAME_FLAG!=0){};//等待识别条到来
-    //g_DCMI_IT_FRAME_FLAG=2;
+		// 输出相关的相机速度变量
 		frameSpeedOut();
 		OV.frame.timeCount = 0;	
-		if(start==1)
+		if(OV.frame.tansFinishFlag == 1)
 		{
 			//USART_OUT(USART3,"Camera AEC_Fun...");
-					
-			Itera_Threshold();
-	
-			//GUI_Text(100,200,(uint8_t*)"Ok!!",White,Blue);
-			//GUI_Text_variables(100,230,White,Blue,canuse);
-			yushu=(canuse%40);
-			if(yushu==1) 
-			{
-				cmline=39;
-			}		
-			else if(yushu==0)
-			{
-				cmline=38;
-			}
-			else
-			{cmline=yushu-2;}
-			
-			if(canuse==1)
-			{		
-				LCD_SetCursor(0,239);
-				LCD_REG = 0x0022;
-				for(jj=0;jj<320;jj++)
-				{
-					LCD_RAM=g_ColorData16t[39][jj];
-				}
-			}
-			else
-			{
-				LCD_SetCursor(0,canuse-2);
-				LCD_REG = 0x0022;
-				for(jj=0;jj<320;jj++)
-				{
-					LCD_RAM=g_ColorData16t[cmline][jj];
-				}	
-			}
-		
+			//ExtractSignal();	
+			//Itera_Threshold();
+			//showSrcImgOnLCD();
+			getBallColor();
 		}
 		OV.frame.timeCountOut = OV.frame.timeCount;
 	}	
@@ -269,17 +230,6 @@ void LCD_CS_ResetBits(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-  /* Infinite loop */
-  while (1)
-  {
-
-  }
-}
 #endif
 
 /**

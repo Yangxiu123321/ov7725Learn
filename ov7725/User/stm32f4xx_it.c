@@ -76,7 +76,7 @@ void HardFault_Handler(void)
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
   {
-			GUI_Text(100,200,"Camera Init..",White,Blue);
+			//GUI_Text(100,200,"Camera Init..",White,Blue);
   }
 }
 
@@ -200,9 +200,13 @@ void USARTx_IRQHANDLER(void)
 {
   if(USART_GetITStatus(Open207V_USART, USART_IT_RXNE) != RESET)
   {
-  		//USART_ClearITPendingBit(USART2,USART_IT_RXNE);
+  	USART_ClearITPendingBit(USART2,USART_IT_RXNE);
 		printf("\n\rUSART Hyperterminal Interrupts Receive a word: %c\n\r",USART_ReceiveData(Open207V_USART));
-  }
+  }else
+	{
+	  USART_ReceiveData(Open207V_USART);
+		USART_ClearITPendingBit(USART2,USART_IT_ORE_RX);
+	}
 }
 
 extern __IO uint16_t  g_ColorData16t[40][320];//DCMI接口采集原始数据内存
@@ -219,20 +223,23 @@ uint16_t shuzu[320]={0};
 void DCMI_IRQHandler(void)
 {
 	static uint16_t i=0;
+	// 判断接受了一帧的数据
 	if (DCMI_GetITStatus(DCMI_IT_VSYNC) != RESET) 
 	{
-		canuse=0;
-		start=1;
+		OV.frame.rows = 0;
+		OV.frame.tansFinishFlag = 1;
+		OV.frame.VSYNCNum++;
 		DCMI_ClearITPendingBit(DCMI_IT_VSYNC); 
 	}
-	
+	// 接受完一行的数据
 	if(DCMI_GetITStatus(DCMI_IT_LINE) != RESET) 
 	{
-		if(start==1)
+		if(OV.frame.tansFinishFlag == 1)
 		{
-			canuse++;replaceline=canuse-1;
+			OV.frame.rows++;
+			replaceline=OV.frame.rows-1;
 		}
-		shuzu[i++]=canuse;
+		shuzu[i++]=OV.frame.rows;
 	  if(i>319)
 		{
 			i=0;
@@ -241,11 +248,13 @@ void DCMI_IRQHandler(void)
 		DCMI_ClearITPendingBit(DCMI_IT_LINE); 			  
 	}
 	
+	// 接受完一帧的数据
 	if (DCMI_GetITStatus(DCMI_IT_FRAME) != RESET) 
 	{
 		OV.frame.frameNum++;
 		DCMI_ClearITPendingBit(DCMI_IT_FRAME);
 	}
+	
 	if (DCMI_GetITStatus(DCMI_IT_ERR) != RESET) 
 	{
 		DCMI_ClearITPendingBit(DCMI_IT_ERR);
@@ -274,23 +283,6 @@ void CAN1_RX0_IRQHandler(void)
 
 		CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);				//reveive data	
 		CAN_ClearITPendingBit(CAN1,CAN_IT_FMP0);
-		
-// 	  if(RxMessage.StdId==0x25)//主控地址
-// 		{
-// 			if(RxMessage.Data[0]=='b')//主控发来消息看近景
-// 			{
-// 				cameralineschange='b';
-// 			}
-// 			
-// 			if(RxMessage.Data[0]=='c')		
-// 			{
-// 				cameralineschange='c';
-// 			}
-
-
-// 		}
-	
-
 	
 }
 

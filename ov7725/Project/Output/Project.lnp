@@ -11,6 +11,7 @@
 ".\output\vesion.o"
 ".\output\timer.o"
 ".\output\camera.o"
+".\output\easytracer.o"
 ".\output\imtrans.o"
 ".\output\rodata.o"
 ".\output\startup_stm32f4xx.o"

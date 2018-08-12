@@ -2,7 +2,7 @@
 .\output\camera.o: ..\User\camera\camera.h
 .\output\camera.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\camera.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\camera.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\camera.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\camera.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\camera.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\camera.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -35,6 +35,12 @@
 .\output\camera.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\camera.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\camera.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\output\camera.o: ..\User\EasyTrace\EasyTracer.h
 .\output\camera.o: ..\User\usart.h
-.\output\camera.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\camera.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\camera.o: ..\User\config.h
+.\output\camera.o: ..\Tool\rodata.h
+.\output\camera.o: ..\User\LCD/LCD.h
+.\output\camera.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\camera.o: ..\User\LCD/AsciiLib.h
+.\output\camera.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\string.h

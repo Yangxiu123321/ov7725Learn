@@ -2,7 +2,7 @@
 .\output\main.o: ..\User\can.h
 .\output\main.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\main.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -37,14 +37,15 @@
 .\output\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\main.o: ..\User\timer.h
 .\output\main.o: ..\User\usart.h
-.\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\main.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\main.o: ..\User\config.h
 .\output\main.o: ..\User\camera\camera.h
+.\output\main.o: ..\User\EasyTrace\EasyTracer.h
 .\output\main.o: ..\Tool\rodata.h
 .\output\main.o: ..\User\LCD/LCD.h
-.\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
+.\output\main.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\math.h
 .\output\main.o: ..\User\LCD/AsciiLib.h
-.\output\main.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
+.\output\main.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\string.h
 .\output\main.o: ..\Libraries\CMSIS\Include\arm_math.h
 .\output\main.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\output\main.o: ..\Tool\Imtrans.h

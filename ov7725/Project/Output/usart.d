@@ -1,9 +1,9 @@
 .\output\usart.o: ..\User\usart.c
 .\output\usart.o: ..\User\usart.h
-.\output\usart.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\usart.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\usart.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\output\usart.o: ..\Libraries\CMSIS\Include\core_cm4.h
-.\output\usart.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\usart.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\usart.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\usart.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\usart.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
@@ -37,4 +37,4 @@
 .\output\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\usart.o: ..\User\config.h
-.\output\usart.o: E:\program files\keil\ARM\ARMCC\Bin\..\include\stdarg.h
+.\output\usart.o: D:\program files\keil\ARM\ARMCC\Bin\..\include\stdarg.h
