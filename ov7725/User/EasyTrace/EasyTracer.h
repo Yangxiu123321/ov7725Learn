@@ -71,5 +71,5 @@ typedef struct             //识别结果
 //返回1识别成功，返回1识别失败
 //-----------------------------------------------------------------------------------------
 int Trace(const TARGET_CONDI *Condition,RESULT *Resu);
-
+void RGBtoHSL(const COLOR_RGB *Rgb, COLOR_HSL *Hsl);
 #endif

@@ -27,7 +27,17 @@ Project File Date:  08/12/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\program files\keil\ARM\ARMCC\Bin'
 Build target 'Open407V-D'
-".\Output\Project.axf" - 0 Error(s), 0 Warning(s).
+compiling dcmi_OV7725.c...
+compiling main.c...
+compiling stm32f4xx_it.c...
+..\User\stm32f4xx_it.c(273): warning:  #550-D: variable "buffer"  was set but never used
+  	 uint8_t buffer=0;
+..\User\stm32f4xx_it.c: 1 warning, 0 errors
+compiling camera.c...
+linking...
+Program Size: Code=23522 RO-data=2122 RW-data=76 ZI-data=27924  
+FromELF: creating hex file...
+".\Output\Project.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +60,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.1
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

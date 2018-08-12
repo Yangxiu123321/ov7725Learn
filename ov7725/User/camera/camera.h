@@ -28,6 +28,14 @@ typedef struct
 	COLOR_HSL hsl;
 }colorSpace_t;
 
+typedef struct
+{
+  uint32_t noBallNum;
+	uint32_t WhiteBallNum;
+	uint32_t BlackBallNum;
+	uint8_t ballColor;
+}ballColor_t;
+
 
 typedef struct
 {
@@ -35,6 +43,8 @@ typedef struct
 	uint8_t tansFinishFlag;
 	// 接收完一行的标志
 	uint8_t transLineFinishFlag;
+	// 球颜色
+	ballColor_t ballColor;
 	
 	uint16_t timeCount;
 	uint16_t timeCountOut;
@@ -56,11 +66,17 @@ typedef struct
 
 typedef struct
 {
+  uint8_t usartFlag;
+}debug_t;
+
+typedef struct
+{
 	__IO  uint16_t  gImageRGB[IMG_HEIGHT][IMG_WIDTH];
 	// ROI
 	//__IO uint16_t  gImageRoiRGB[IMG_ROI_HEIGHT][IMG_ROI_WIDTH];
 	
 	frame_t frame;
+	debug_t debug;
 }camera_t;
 
 

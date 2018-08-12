@@ -28,12 +28,12 @@ static void ReadColor(unsigned int x,unsigned int y,COLOR_RGB *Rgb)
 //============================================================================
 //RGB转HSL
 //============================================================================
-static void RGBtoHSL(const COLOR_RGB *Rgb, COLOR_HSL *Hsl)
+void RGBtoHSL(const COLOR_RGB *Rgb, COLOR_HSL *Hsl)
 {
   int h,s,l,maxVal,minVal,difVal;
 	int r  = Rgb->red;
 	int g  = Rgb->green;
-    int b  = Rgb->blue;
+  int b  = Rgb->blue;
 	
 	maxVal = max3v(r, g, b);
 	minVal = min3v(r, g, b);

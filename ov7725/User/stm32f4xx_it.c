@@ -167,9 +167,16 @@ void SysTick_Handler(void)
   */
 void TIM3_IRQHandler(void)
 {
+	static uint8_t usartTime = 0;
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
 	{
+		usartTime ++;
 		OV.frame.timeCount++;
+		if(usartTime > 10)
+		{
+			OV.debug.usartFlag = 1;
+		  usartTime = 0;
+		}
 	}
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 }
